@@ -6,6 +6,11 @@
 
 It's a simple book app created with Android Studio. Source of the project is available, just open the `src` folder as a project in Android Studio and start modifying.
 
+sqlite: database
+mysql: database
+sql server: database
+
+
 ![screenshot](docs/screenshot.jpg)
 
 ## Release
