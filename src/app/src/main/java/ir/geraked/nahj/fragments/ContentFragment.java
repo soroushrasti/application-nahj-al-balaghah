@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,11 +22,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import ir.geraked.nahj.MainActivity;
 import ir.geraked.nahj.R;
 import ir.geraked.nahj.database.Model;
 import ir.geraked.nahj.database.SqlLiteDbHelper;
-import ir.geraked.nahj.recyclerlist.ItemAdapter;
+import com.google.android.material.transition.MaterialSharedAxis;
 
 
 /**
@@ -113,6 +112,8 @@ public class ContentFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        setEnterTransition(new MaterialSharedAxis(MaterialSharedAxis.Z, true));
+        setReturnTransition(new MaterialSharedAxis(MaterialSharedAxis.Z, false));
     }
 
     @Override
@@ -143,7 +144,7 @@ public class ContentFragment extends Fragment {
                     Snackbar snackbar = Snackbar.make(getView(), "«" + cat + " " + num + "»" + " از لیست علاقه‌مندی‌ها حذف شد", Snackbar.LENGTH_SHORT);
                     snackbar.setActionTextColor(Color.WHITE);
                     View snackbarView = snackbar.getView();
-                    int snackbarTextId = android.support.design.R.id.snackbar_text;
+                    int snackbarTextId = com.google.android.material.R.id.snackbar_text;
                     TextView textView = snackbarView.findViewById(snackbarTextId);
                     textView.setTextColor(Color.WHITE);
                     if (sharedPref.getBoolean("THEME_NIGHT_MODE", false))
@@ -161,7 +162,7 @@ public class ContentFragment extends Fragment {
                     Snackbar snackbar = Snackbar.make(getView(), "«" + cat + " " + num + "»" + " به لیست علاقه‌مندی‌ها اضافه شد", Snackbar.LENGTH_SHORT);
                     snackbar.setActionTextColor(Color.WHITE);
                     View snackbarView = snackbar.getView();
-                    int snackbarTextId = android.support.design.R.id.snackbar_text;
+                    int snackbarTextId = com.google.android.material.R.id.snackbar_text;
                     TextView textView = snackbarView.findViewById(snackbarTextId);
                     textView.setTextColor(Color.WHITE);
                     if (sharedPref.getBoolean("THEME_NIGHT_MODE", false))

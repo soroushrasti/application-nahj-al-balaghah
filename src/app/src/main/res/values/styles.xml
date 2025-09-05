@@ -1,7 +1,7 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Base application theme using Material 3 DayNight -->
+    <style name="AppTheme" parent="Theme.Material3.DayNight">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -13,7 +13,7 @@
         <item name="android:windowBackground">@drawable/bg</item>
     </style>
 
-    <style name="IntroTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="IntroTheme" parent="Theme.Material3.Dark">
         <item name="colorPrimary">@color/colorNightPrimary</item>
         <item name="colorPrimaryDark">@color/colorNightPrimaryDark</item>
         <item name="colorAccent">@color/colorNightAccent</item>
@@ -30,12 +30,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.Material3.ActionBar">
         <item name="android:textColorHint">#BDBDBD</item>
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.Material3" />
 
     <style name="MyTextAppearance">
         <item name="android:fontFamily">@font/iran_sans</item>
@@ -52,7 +52,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="NightTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="NightTheme" parent="Theme.Material3.Dark">
         <item name="colorPrimary">@color/colorNightPrimary</item>
         <item name="colorPrimaryDark">@color/colorNightPrimaryDark</item>
         <item name="colorAccent">@color/colorNightAccent</item>

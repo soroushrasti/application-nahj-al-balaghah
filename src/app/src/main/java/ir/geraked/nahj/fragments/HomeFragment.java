@@ -3,11 +3,11 @@ package ir.geraked.nahj.fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import ir.geraked.nahj.MainActivity;
 import ir.geraked.nahj.R;
+import com.google.android.material.transition.MaterialSharedAxis;
 
 
 /**
@@ -71,30 +72,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.fhc_wisdoms:
-                cat = 3;
-                toolbarTitle = getString(R.string.wisdoms);
-                break;
-            case R.id.fhc_sermons:
-                cat = 1;
-                toolbarTitle = getString(R.string.sermons);
-                break;
-            case R.id.fhc_letters:
-                cat = 2;
-                toolbarTitle = getString(R.string.letters);
-                break;
-            case R.id.fhc_strange_words:
-                cat = 4;
-                toolbarTitle = getString(R.string.strange_words);
-                break;
-            case R.id.fhc_about_book:
-                cat = 5;
-                toolbarTitle = getString(R.string.about_book);
-                break;
-            default:
-                cat = 0;
-                toolbarTitle = getString(R.string.app_name);
+        int viewId = view.getId();
+        if (viewId == R.id.fhc_wisdoms) {
+            cat = 3;
+            toolbarTitle = getString(R.string.wisdoms);
+        } else if (viewId == R.id.fhc_sermons) {
+            cat = 1;
+            toolbarTitle = getString(R.string.sermons);
+        } else if (viewId == R.id.fhc_letters) {
+            cat = 2;
+            toolbarTitle = getString(R.string.letters);
+        } else if (viewId == R.id.fhc_strange_words) {
+            cat = 4;
+            toolbarTitle = getString(R.string.strange_words);
+        } else if (viewId == R.id.fhc_about_book) {
+            cat = 5;
+            toolbarTitle = getString(R.string.about_book);
+        } else {
+            cat = 0;
+            toolbarTitle = getString(R.string.app_name);
         }
 
         Handler handler = new Handler();
@@ -107,8 +103,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 bundle.putString("TOOLBAR_TITLE", toolbarTitle);
                 Fragment fragment = new ListFragment();
                 fragment.setArguments(bundle);
+                // Apply Material shared-axis (X) for list navigation
+                fragment.setEnterTransition(new MaterialSharedAxis(MaterialSharedAxis.X, true));
+                fragment.setReturnTransition(new MaterialSharedAxis(MaterialSharedAxis.X, false));
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setReorderingAllowed(true);
                 fragmentTransaction.replace(R.id.frg_container, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();

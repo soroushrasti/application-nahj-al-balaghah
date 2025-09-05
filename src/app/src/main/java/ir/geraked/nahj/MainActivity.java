@@ -7,20 +7,20 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.core.view.ViewCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +34,9 @@ import java.util.ArrayList;
 import ir.geraked.nahj.fragments.HomeFragment;
 import ir.geraked.nahj.fragments.ListFragment;
 import ir.geraked.nahj.recyclerlist.Item;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.graphics.Insets;
 
 
 public class MainActivity extends AppCompatActivity
@@ -56,10 +59,19 @@ public class MainActivity extends AppCompatActivity
             setTheme(R.style.AppTheme_NoActionBar);
         }
 
+        // Edge-to-edge
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+
         setContentView(R.layout.activity_main);
 
         // Add a Toolbar to an Activity
         Toolbar toolbar = findViewById(R.id.toolbar);
+        // Apply top inset to toolbar for status bar overlap
+        ViewCompat.setOnApplyWindowInsetsListener(toolbar, (v, insets) -> {
+            Insets sb = insets.getInsets(WindowInsetsCompat.Type.statusBars());
+            v.setPadding(v.getPaddingLeft(), sb.top, v.getPaddingRight(), v.getPaddingBottom());
+            return insets;
+        });
         setSupportActionBar(toolbar);
 
         // NavigationDrawer
@@ -69,6 +81,14 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Inset bottom for content container to avoid nav bar overlap
+        View frg = findViewById(R.id.frg_container);
+        ViewCompat.setOnApplyWindowInsetsListener(frg, (v, insets) -> {
+            Insets sys = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), sys.bottom);
+            return insets;
+        });
 
         // NightMode Toggle Button
         nightModeToggle = navigationView.getHeaderView(0).findViewById(R.id.night_mode_toggle);
@@ -130,7 +150,7 @@ public class MainActivity extends AppCompatActivity
                 Snackbar snackbar = Snackbar.make(drawer, "برای خروج دوباره بازگشت را لمس کنید", Snackbar.LENGTH_SHORT);
                 snackbar.setActionTextColor(Color.WHITE);
                 View snackbarView = snackbar.getView();
-                int snackbarTextId = android.support.design.R.id.snackbar_text;
+                int snackbarTextId = com.google.android.material.R.id.snackbar_text;
                 TextView textView = snackbarView.findViewById(snackbarTextId);
                 textView.setTextColor(Color.WHITE);
                 ViewCompat.setLayoutDirection(snackbarView,ViewCompat.LAYOUT_DIRECTION_RTL);
@@ -185,6 +205,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             getSupportFragmentManager()
                     .beginTransaction()
+                    .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
                     .replace(R.id.frg_container, new HomeFragment())
                     .commit();
         } else if (id == R.id.nav_favorites) {
@@ -193,6 +214,7 @@ public class MainActivity extends AppCompatActivity
             Fragment newFragment = new ListFragment();
             newFragment.setArguments(bundle);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
             transaction.replace(R.id.frg_container, newFragment);
             transaction.addToBackStack(null);
             transaction.commit();
@@ -224,10 +246,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        String q = Utils.normalize(newText);
         ArrayList<Item> newList = new ArrayList<>();
         for (Item item : ListFragment.mItem) {
-            String cnt = item.getuTitle();
-            if (cnt.contains(newText)) {
+            String t = Utils.normalize(item.getuTitle());
+            String s = Utils.normalize(item.getuShort());
+            if (t.contains(q) || s.contains(q)) {
                 newList.add(item);
             }
         }

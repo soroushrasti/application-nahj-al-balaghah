@@ -3,12 +3,13 @@ package ir.geraked.nahj.recyclerlist;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.HapticFeedbackConstants;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -89,7 +90,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
                         bundle.putInt("ITEM_ID", aItem.getuId());
                         Fragment myFragment = new ContentFragment();
                         myFragment.setArguments(bundle);
-                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.frg_container, myFragment).addToBackStack(null).commit();
+                        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                        activity.getSupportFragmentManager()
+                                .beginTransaction()
+                                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                                .replace(R.id.frg_container, myFragment)
+                                .addToBackStack(null)
+                                .commit();
 
                     }
                 }, 100);
