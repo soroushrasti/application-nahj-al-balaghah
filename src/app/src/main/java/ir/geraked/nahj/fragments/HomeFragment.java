@@ -1,4 +1,4 @@
-package ir.geraked.nahj.fragments;
+package com.soroushrasti.nahj.fragments;
 
 
 import android.os.Bundle;
@@ -13,10 +13,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import ir.geraked.nahj.MainActivity;
-import ir.geraked.nahj.R;
+import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.soroushrasti.nahj.MainActivity;
+import com.soroushrasti.nahj.R;
 import com.google.android.material.transition.MaterialSharedAxis;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import androidx.viewpager2.widget.ViewPager2;
+import com.soroushrasti.nahj.ui.HeroPagerAdapter;
+import com.soroushrasti.nahj.ui.FullscreenImageActivity;
 
 
 /**
@@ -24,6 +42,9 @@ import com.google.android.material.transition.MaterialSharedAxis;
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
+    private Handler sliderHandler;
+    private Runnable sliderRunnable;
+    private ViewPager2 heroPager;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -48,7 +69,87 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         fhcStrangeWords.setOnClickListener(this);
         fhcAboutBook.setOnClickListener(this);
 
+        // Setup hero pager from assets/images with fallback
+        heroPager = view.findViewById(R.id.hero_pager);
+        TabLayout heroDots = view.findViewById(R.id.hero_dots);
+        if (heroPager != null) {
+            List<String> items = new ArrayList<>();
+            try {
+                AssetManager am = requireContext().getAssets();
+                String[] files = am.list("images");
+                if (files != null) {
+                    for (String f : files) {
+                        String lf = f.toLowerCase();
+                        if (lf.endsWith(".png") || lf.endsWith(".jpg") || lf.endsWith(".jpeg") || lf.endsWith(".webp")) {
+                            items.add(f);
+                        }
+                    }
+                }
+            } catch (IOException ignored) { }
+            if (items.isEmpty()) {
+                items.add("res:header_banner");
+            }
+            HeroPagerAdapter adapter = new HeroPagerAdapter(requireContext(), items, position -> {
+                Intent intent = new Intent(requireContext(), FullscreenImageActivity.class);
+                intent.putStringArrayListExtra("ITEMS", new ArrayList<>(items));
+                intent.putExtra("START", position);
+                startActivity(intent);
+            });
+            heroPager.setAdapter(adapter);
+
+            // Crossfade + subtle zoom transformer
+            heroPager.setPageTransformer(new ViewPager2.PageTransformer() {
+                @Override
+                public void transformPage(View page, float position) {
+                    float abs = Math.abs(position);
+                    page.setAlpha(1f - 0.3f * abs);
+                    float scale = 0.9f + (1f - abs) * 0.1f;
+                    page.setScaleX(scale);
+                    page.setScaleY(scale);
+                }
+            });
+
+            if (heroDots != null) {
+                new TabLayoutMediator(heroDots, heroPager, (tab, pos) -> {}).attach();
+            }
+
+            // Auto slide every 4s
+            sliderHandler = new Handler();
+            sliderRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    if (heroPager == null || heroPager.getAdapter() == null) return;
+                    int count = heroPager.getAdapter().getItemCount();
+                    if (count <= 1) return;
+                    int next = (heroPager.getCurrentItem() + 1) % count;
+                    heroPager.setCurrentItem(next, true);
+                    sliderHandler.postDelayed(this, 4000);
+                }
+            };
+            sliderHandler.postDelayed(sliderRunnable, 4000);
+
+            heroPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                @Override
+                public void onPageSelected(int position) {
+                    super.onPageSelected(position);
+                    if (sliderHandler != null) {
+                        sliderHandler.removeCallbacks(sliderRunnable);
+                        sliderHandler.postDelayed(sliderRunnable, 4000);
+                    }
+                }
+            });
+        }
+
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (sliderHandler != null && sliderRunnable != null) {
+            sliderHandler.removeCallbacks(sliderRunnable);
+        }
+        heroPager = null;
     }
 
     // Handle Toolbar Items in a Fragment

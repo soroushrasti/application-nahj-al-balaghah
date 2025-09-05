@@ -1,4 +1,4 @@
-package ir.geraked.nahj.database;
+package com.soroushrasti.nahj.database;
 
 public class Model {
 

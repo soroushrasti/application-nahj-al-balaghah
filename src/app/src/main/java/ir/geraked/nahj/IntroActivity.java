@@ -1,4 +1,4 @@
-package ir.geraked.nahj;
+package com.soroushrasti.nahj;
 
 import android.content.Intent;
 import android.os.Handler;

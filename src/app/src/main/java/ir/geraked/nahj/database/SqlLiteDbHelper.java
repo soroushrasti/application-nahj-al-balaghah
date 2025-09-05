@@ -1,4 +1,4 @@
-package ir.geraked.nahj.database;
+package com.soroushrasti.nahj.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -100,7 +100,7 @@ public class SqlLiteDbHelper extends SQLiteOpenHelper {
 
     public SQLiteDatabase openDataBase() throws SQLiteException {
         File dbFile = mCtx.getDatabasePath(DB_NAME);
-        SharedPreferences sharedPref = mCtx.getSharedPreferences("ir.geraked.nahj.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = mCtx.getSharedPreferences("com.soroushrasti.nahj.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         int dbVersion = sharedPref.getInt("DB_VERSION", 1);
         if (dbFile.exists()) {

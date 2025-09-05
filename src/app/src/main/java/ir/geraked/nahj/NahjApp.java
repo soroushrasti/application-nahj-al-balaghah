@@ -1,4 +1,4 @@
-package ir.geraked.nahj;
+package com.soroushrasti.nahj;
 
 import android.app.Application;
 import com.google.android.material.color.DynamicColors;

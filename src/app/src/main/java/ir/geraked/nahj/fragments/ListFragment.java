@@ -1,4 +1,4 @@
-package ir.geraked.nahj.fragments;
+package com.soroushrasti.nahj.fragments;
 
 
 import android.os.Bundle;
@@ -19,12 +19,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.geraked.nahj.MainActivity;
-import ir.geraked.nahj.R;
-import ir.geraked.nahj.database.Model;
-import ir.geraked.nahj.database.SqlLiteDbHelper;
-import ir.geraked.nahj.recyclerlist.Item;
-import ir.geraked.nahj.recyclerlist.ItemAdapter;
+import com.soroushrasti.nahj.MainActivity;
+import com.soroushrasti.nahj.R;
+import com.soroushrasti.nahj.database.Model;
+import com.soroushrasti.nahj.database.SqlLiteDbHelper;
+import com.soroushrasti.nahj.recyclerlist.Item;
+import com.soroushrasti.nahj.recyclerlist.ItemAdapter;
 
 
 /**

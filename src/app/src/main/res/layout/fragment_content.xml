@@ -5,54 +5,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
-    android:paddingBottom="16dp"
     android:paddingTop="16dp"
+    android:paddingBottom="16dp"
     tools:context=".fragments.ContentFragment">
 
-
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:background="@color/cardview_light_background"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="2dp">
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="3dp"
+        app:strokeColor="?attr/colorOutline"
+        app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/fct_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
                 android:gravity="center"
-                android:paddingBottom="16dp"
-                android:paddingEnd="8dp"
-                android:paddingStart="8dp"
+                android:paddingStart="16dp"
                 android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
                 android:text="@string/text_view"
-                android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textSize="14sp"
+                android:background="@color/colorPrimary"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/fct_cnt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/cardBgColor"
-                android:paddingBottom="16dp"
-                android:paddingEnd="8dp"
-                android:paddingStart="8dp"
+                android:paddingStart="16dp"
                 android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
                 android:text="@string/text_view"
                 android:textIsSelectable="true"
-                android:textSize="14sp" />
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </ScrollView>

@@ -1,4 +1,4 @@
-package ir.geraked.nahj.recyclerlist;
+package com.soroushrasti.nahj.recyclerlist;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,8 +16,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.geraked.nahj.fragments.ContentFragment;
-import ir.geraked.nahj.R;
+import com.soroushrasti.nahj.fragments.ContentFragment;
+import com.soroushrasti.nahj.R;
 
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {

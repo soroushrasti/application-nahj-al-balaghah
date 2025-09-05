@@ -1,4 +1,4 @@
-package ir.geraked.nahj;
+package com.soroushrasti.nahj;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -31,9 +31,9 @@ import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
-import ir.geraked.nahj.fragments.HomeFragment;
-import ir.geraked.nahj.fragments.ListFragment;
-import ir.geraked.nahj.recyclerlist.Item;
+import com.soroushrasti.nahj.fragments.HomeFragment;
+import com.soroushrasti.nahj.fragments.ListFragment;
+import com.soroushrasti.nahj.recyclerlist.Item;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.graphics.Insets;
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
 
-        sharedPref = getSharedPreferences("ir.geraked.nahj.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
+        sharedPref = getSharedPreferences("com.soroushrasti.nahj.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
         if (sharedPref.getBoolean("THEME_NIGHT_MODE", false)) {
             setTheme(R.style.NightTheme_NoActionBar);
         } else {
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity
 //        else if (id == R.id.nav_rate) {
 //            try {
 //                Intent intent = new Intent(Intent.ACTION_EDIT);
-//                intent.setData(Uri.parse("bazaar://details?id=" + "ir.geraked.nahj"));
+//                intent.setData(Uri.parse("bazaar://details?id=" + "com.soroushrasti.nahj"));
 //                intent.setPackage("com.farsitel.bazaar");
 //                startActivity(intent);
 //            } catch (Exception e) {

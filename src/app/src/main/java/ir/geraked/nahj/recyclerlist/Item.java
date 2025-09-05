@@ -1,4 +1,4 @@
-package ir.geraked.nahj.recyclerlist;
+package com.soroushrasti.nahj.recyclerlist;
 
 public class Item {
 

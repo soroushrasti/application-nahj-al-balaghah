@@ -1,4 +1,4 @@
-package ir.geraked.nahj.fragments;
+package com.soroushrasti.nahj.fragments;
 
 
 import android.app.Dialog;
@@ -22,9 +22,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import ir.geraked.nahj.R;
-import ir.geraked.nahj.database.Model;
-import ir.geraked.nahj.database.SqlLiteDbHelper;
+import com.soroushrasti.nahj.R;
+import com.soroushrasti.nahj.database.Model;
+import com.soroushrasti.nahj.database.SqlLiteDbHelper;
 import com.google.android.material.transition.MaterialSharedAxis;
 
 
@@ -54,7 +54,7 @@ public class ContentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_content, container, false);
 
-        sharedPref = getActivity().getSharedPreferences("ir.geraked.nahj.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
+        sharedPref = getActivity().getSharedPreferences("com.soroushrasti.nahj.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
 
         fctTitle = view.findViewById(R.id.fct_title);
         fctCnt = view.findViewById(R.id.fct_cnt);
