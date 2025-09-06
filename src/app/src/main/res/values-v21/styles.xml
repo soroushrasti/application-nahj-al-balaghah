@@ -1,5 +1,15 @@
 <resources>
 
+    <!-- Base Night Theme -->
+    <style name="NightTheme" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">@color/colorNightPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/colorNightAccent</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:windowBackground">@color/colorNightPrimaryDark</item>
+        <item name="fontFamily">@font/iran_sans</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

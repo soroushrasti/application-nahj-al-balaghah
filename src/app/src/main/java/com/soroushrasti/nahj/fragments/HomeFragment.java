@@ -61,23 +61,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         CardView fhcSermons = view.findViewById(R.id.fhc_sermons);
         CardView fhcLetters = view.findViewById(R.id.fhc_letters);
         CardView fhcStrangeWords = view.findViewById(R.id.fhc_strange_words);
-        CardView fhcAboutBook = view.findViewById(R.id.fhc_about_book);
 
         fhcWisdoms.setOnClickListener(this);
         fhcSermons.setOnClickListener(this);
         fhcLetters.setOnClickListener(this);
         fhcStrangeWords.setOnClickListener(this);
-        fhcAboutBook.setOnClickListener(this);
 
         // Setup hero pager from assets/images with fallback
         heroPager = view.findViewById(R.id.hero_pager);
-        TabLayout heroDots = view.findViewById(R.id.hero_dots);
+        // Removed TabLayout heroDots reference since we removed the slide bar
         if (heroPager != null) {
             List<String> items = new ArrayList<>();
+
             try {
                 AssetManager am = requireContext().getAssets();
                 String[] files = am.list("images");
-                if (files != null) {
+                if (files != null && files.length > 0) {
+                    // Clear default placeholders if we have actual images
+                    items.clear();
                     for (String f : files) {
                         String lf = f.toLowerCase();
                         if (lf.endsWith(".png") || lf.endsWith(".jpg") || lf.endsWith(".jpeg") || lf.endsWith(".webp")) {
@@ -86,9 +87,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     }
                 }
             } catch (IOException ignored) { }
-            if (items.isEmpty()) {
-                items.add("res:header_banner");
-            }
+
+
             HeroPagerAdapter adapter = new HeroPagerAdapter(requireContext(), items, position -> {
                 Intent intent = new Intent(requireContext(), FullscreenImageActivity.class);
                 intent.putStringArrayListExtra("ITEMS", new ArrayList<>(items));
@@ -109,9 +109,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
             });
 
-            if (heroDots != null) {
-                new TabLayoutMediator(heroDots, heroPager, (tab, pos) -> {}).attach();
-            }
 
             // Auto slide every 4s
             sliderHandler = new Handler();
@@ -186,9 +183,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         } else if (viewId == R.id.fhc_strange_words) {
             cat = 4;
             toolbarTitle = getString(R.string.strange_words);
-        } else if (viewId == R.id.fhc_about_book) {
-            cat = 5;
-            toolbarTitle = getString(R.string.about_book);
         } else {
             cat = 0;
             toolbarTitle = getString(R.string.app_name);

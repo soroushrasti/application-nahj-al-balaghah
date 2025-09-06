@@ -1,95 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
+    android:background="@color/colorBackground"
     tools:context=".fragments.HomeFragment">
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/hero_card"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="12dp"
-        android:layout_weight="1"
-        app:cardCornerRadius="20dp"
-        app:cardUseCompatPadding="true"
-        app:cardElevation="6dp">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/hero_pager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/hero_dots"
-                style="@style/Widget.Material3.TabLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center_horizontal"
-                android:layout_marginBottom="12dp"
-                app:tabIndicatorFullWidth="false"
-                app:tabIndicatorHeight="3dp"
-                app:tabIndicatorColor="@android:color/white"
-                app:tabIndicatorGravity="center"
-                app:tabSelectedTextColor="@android:color/white"
-                app:tabTextColor="#80FFFFFF" />
-        </FrameLayout>
-    </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <!-- Welcome Header -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:background="@drawable/gradient_header_bg">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Spiritual Words"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="کلمات روحانی"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:fontFamily="serif" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Hero Image Slider -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/hero_card"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/white">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/hero_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <!-- Removed the slide bar dots -->
+            </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Categories Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="بخش ها"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            android:textColor="@color/colorDarkFont"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Wisdoms Card -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/fhc_wisdoms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            app:strokeColor="?attr/colorOutline"
-            app:strokeWidth="1dp"
-            android:layout_marginBottom="12dp">
+            app:cardCornerRadius="20dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="@color/colorWisdomsLight"
+            android:layout_marginBottom="16dp"
+            app:rippleColor="@color/colorWisdoms">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="88dp"
+                android:minHeight="100dp"
                 android:gravity="center_vertical"
-                android:padding="16dp"
+                android:padding="20dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:tint="?attr/colorPrimary"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:tint="@color/colorWisdoms"
                     android:contentDescription="@string/wisdoms"
-                    app:srcCompat="@drawable/ic_speaker_notes" />
+                    app:srcCompat="@drawable/ic_wisdom" />
 
                 <TextView
                     android:id="@+id/fht_wisdoms"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingStart="16dp"
+                    android:paddingStart="20dp"
                     android:text="@string/wisdoms"
-                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/colorWisdoms"
+                    android:textStyle="bold" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Sermons and Letters Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/fhc_sermons"
@@ -99,36 +141,37 @@
                 android:layout_marginEnd="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:strokeColor="?attr/colorOutline"
-                app:strokeWidth="1dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/colorSermonsLight"
+                app:rippleColor="@color/colorSermons">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="88dp"
-                    android:gravity="center_vertical"
+                    android:minHeight="120dp"
+                    android:gravity="center"
                     android:padding="16dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:tint="?attr/colorPrimary"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:tint="@color/colorSermons"
                         android:contentDescription="@string/sermons"
-                        app:srcCompat="@drawable/ic_record_voice_over" />
+                        app:srcCompat="@drawable/ic_sermon"
+                        android:layout_marginBottom="8dp" />
 
                     <TextView
                         android:id="@+id/fht_sermons"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingStart="12dp"
                         android:text="@string/sermons"
-                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        android:textColor="@color/colorSermons"
+                        android:textStyle="bold"
+                        android:gravity="center" />
                 </LinearLayout>
-
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
@@ -139,113 +182,79 @@
                 android:layout_marginStart="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:strokeColor="?attr/colorOutline"
-                app:strokeWidth="1dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/colorLettersLight"
+                app:rippleColor="@color/colorLetters">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="88dp"
-                    android:gravity="center_vertical"
+                    android:minHeight="120dp"
+                    android:gravity="center"
                     android:padding="16dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:tint="?attr/colorPrimary"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:tint="@color/colorLetters"
                         android:contentDescription="@string/letters"
-                        app:srcCompat="@drawable/ic_mail" />
+                        app:srcCompat="@drawable/ic_letter"
+                        android:layout_marginBottom="8dp" />
 
                     <TextView
                         android:id="@+id/fht_letters"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingStart="12dp"
                         android:text="@string/letters"
-                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        android:textColor="@color/colorLetters"
+                        android:textStyle="bold"
+                        android:gravity="center" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
+        <!-- Strange Words Card -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/fhc_strange_words"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:clickable="true"
             android:focusable="true"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            app:strokeColor="?attr/colorOutline"
-            app:strokeWidth="1dp">
+            app:cardCornerRadius="20dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="@color/colorStrangesLight"
+            app:rippleColor="@color/colorStranges">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="88dp"
+                android:minHeight="100dp"
                 android:gravity="center_vertical"
-                android:padding="16dp"
+                android:padding="20dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:tint="?attr/colorPrimary"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:tint="@color/colorStranges"
                     android:contentDescription="@string/strange_words"
-                    app:srcCompat="@drawable/ic_receipt" />
+                    app:srcCompat="@drawable/ic_strange_words" />
 
                 <TextView
                     android:id="@+id/fht_strange_words"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingStart="12dp"
+                    android:paddingStart="20dp"
                     android:text="@string/strange_words"
-                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/fhc_about_book"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            app:strokeColor="?attr/colorOutline"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="88dp"
-                android:gravity="center_vertical"
-                android:padding="16dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:tint="?attr/colorPrimary"
-                    android:contentDescription="@string/about_book"
-                    app:srcCompat="@drawable/ic_announcement" />
-
-                <TextView
-                    android:id="@+id/fht_about_book"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingStart="12dp"
-                    android:text="@string/about_book"
-                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/colorStranges"
+                    android:textStyle="bold" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

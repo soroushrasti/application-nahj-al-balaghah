@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.soroushrasti.nahj">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:name=".NahjApp"
+        android:name="com.soroushrasti.nahj.NahjApp"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon_round"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.soroushrasti.nahj.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
 
         </activity>
         <activity
-            android:name=".IntroActivity"
+            android:name="com.soroushrasti.nahj.IntroActivity"
             android:label="@string/app_name"
-            android:theme="@style/IntroTheme.NoActionBar"
+            android:theme="@style/IntroTheme"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
@@ -28,6 +28,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Full-screen hero image viewer -->
+        <activity
+            android:name="com.soroushrasti.nahj.ui.FullscreenImageActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
-            android:name=".ui.FullscreenImageActivity"
+</manifest>

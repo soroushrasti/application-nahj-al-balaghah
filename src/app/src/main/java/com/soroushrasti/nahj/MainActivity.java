@@ -208,6 +208,50 @@ public class MainActivity extends AppCompatActivity
                     .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
                     .replace(R.id.frg_container, new HomeFragment())
                     .commit();
+        } else if (id == R.id.nav_wisdoms) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("CAT", 3);
+            bundle.putString("TOOLBAR_TITLE", getString(R.string.wisdoms));
+            Fragment newFragment = new ListFragment();
+            newFragment.setArguments(bundle);
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
+            transaction.replace(R.id.frg_container, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } else if (id == R.id.nav_sermons) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("CAT", 1);
+            bundle.putString("TOOLBAR_TITLE", getString(R.string.sermons));
+            Fragment newFragment = new ListFragment();
+            newFragment.setArguments(bundle);
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
+            transaction.replace(R.id.frg_container, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } else if (id == R.id.nav_letters) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("CAT", 2);
+            bundle.putString("TOOLBAR_TITLE", getString(R.string.letters));
+            Fragment newFragment = new ListFragment();
+            newFragment.setArguments(bundle);
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
+            transaction.replace(R.id.frg_container, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } else if (id == R.id.nav_strange_words) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("CAT", 4);
+            bundle.putString("TOOLBAR_TITLE", getString(R.string.strange_words));
+            Fragment newFragment = new ListFragment();
+            newFragment.setArguments(bundle);
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
+            transaction.replace(R.id.frg_container, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         } else if (id == R.id.nav_favorites) {
             Bundle bundle = new Bundle();
             bundle.putBoolean("FAV", true);
@@ -218,21 +262,7 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.frg_container, newFragment);
             transaction.addToBackStack(null);
             transaction.commit();
-        } else if (id == R.id.nav_about) {
-            Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.dialog_about);
-            dialog.show();
         }
-//        else if (id == R.id.nav_rate) {
-//            try {
-//                Intent intent = new Intent(Intent.ACTION_EDIT);
-//                intent.setData(Uri.parse("bazaar://details?id=" + "com.soroushrasti.nahj"));
-//                intent.setPackage("com.farsitel.bazaar");
-//                startActivity(intent);
-//            } catch (Exception e) {
-//                Toast.makeText(this, "خطا", Toast.LENGTH_SHORT).show();
-//            }
-//        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
