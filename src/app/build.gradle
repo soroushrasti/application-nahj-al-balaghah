@@ -4,13 +4,22 @@ plugins {
 
 android {
     namespace 'com.soroushrasti.nahj'
-    compileSdkVersion 34
-    buildToolsVersion '34.0.0'
+    compileSdkVersion 35
+    buildToolsVersion '35.0.0'
+
+    signingConfigs {
+        release {
+            storeFile file('release-key.jks')
+            storePassword 'spiritual2024'
+            keyAlias 'nahj-release-key'
+            keyPassword 'spiritual2024'
+        }
+    }
 
     defaultConfig {
         applicationId "com.soroushrasti.nahj"
         minSdkVersion 21
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode 3
         versionName "1.0.2"
         vectorDrawables.useSupportLibrary = true
@@ -20,6 +29,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         debug {
             // keep defaults

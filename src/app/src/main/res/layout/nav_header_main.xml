@@ -16,7 +16,8 @@
         android:src="@drawable/icon"
         android:layout_marginBottom="16dp"
         android:background="@drawable/circle_background"
-        android:padding="16dp"
+        android:padding="8dp"
+        android:scaleType="centerCrop"
         android:contentDescription="@string/app_name" />
 
     <TextView

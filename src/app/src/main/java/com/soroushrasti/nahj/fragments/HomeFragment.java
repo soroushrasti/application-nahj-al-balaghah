@@ -1,6 +1,6 @@
 package com.soroushrasti.nahj.fragments;
 
-
+import android.util.Log;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.fragment.app.Fragment;
@@ -82,7 +82,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     for (String f : files) {
                         String lf = f.toLowerCase();
                         if (lf.endsWith(".png") || lf.endsWith(".jpg") || lf.endsWith(".jpeg") || lf.endsWith(".webp")) {
-                            items.add(f);
+                            // Filter out problematic files
+                            if (!isProblematicFile(f)) {
+                                // Validate that the image can actually be loaded
+                                if (validateImageFile(am, f)) {
+                                    Log.d("HomeFragment", "Adding valid image: " + f);
+                                    items.add(f);
+                                } else {
+                                    Log.w("HomeFragment", "Skipping invalid image: " + f);
+                                }
+                            } else {
+                                Log.w("HomeFragment", "Skipping problematic file: " + f);
+                            }
                         }
                     }
                 }
@@ -210,6 +221,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             }
         }, 100);
+    }
+
+    private boolean isProblematicFile(String fileName) {
+        // Filter out known problematic files that cause black/bad pictures
+        String lf = fileName.toLowerCase();
+        return lf.contains("progress_font") ||
+               lf.contains("android-logo") ||
+               lf.contains("clock_font") ||
+               lf.startsWith(".") || // Hidden files
+               lf.contains("thumb") || // Thumbnail files
+               lf.contains("cache"); // Cache files
+    }
+
+    private boolean validateImageFile(AssetManager am, String fileName) {
+        // Validate the image file by attempting to decode it
+        try (InputStream is = am.open("images/" + fileName)) {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true; // Only decode image dimensions, not the full bitmap
+            BitmapFactory.decodeStream(is, null, options);
+            // Check if image has valid dimensions and is a recognized format
+            return options.outWidth > 0 && options.outHeight > 0 && options.outMimeType != null;
+        } catch (Exception e) {
+            Log.w("HomeFragment", "Failed to validate image: " + fileName + " - " + e.getMessage());
+            return false;
+        }
     }
 
 }
