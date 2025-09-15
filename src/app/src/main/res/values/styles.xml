@@ -17,8 +17,8 @@
         <item name="colorSurfaceVariant">@color/colorSurfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/colorOnSurfaceVariant</item>
         <item name="android:windowBackground">@color/colorBackground</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:navigationBarColor">@color/colorBackground</item>
         <item name="fontFamily">@font/iran_sans</item>
         <item name="shapeAppearanceSmallComponent">@style/Shape.Spiritual.Small</item>
         <item name="shapeAppearanceMediumComponent">@style/Shape.Spiritual.Medium</item>
@@ -43,6 +43,9 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.Material3.ActionBar">
         <item name="android:textColorHint">@color/colorSecondaryText</item>
         <item name="colorPrimary">@color/colorPrimary</item>
+        <!-- Make toolbar/menu icons contrast with background -->
+        <item name="colorControlNormal">?attr/colorOnSurface</item>
+        <item name="android:textColorPrimary">?attr/colorOnSurface</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.Material3" />

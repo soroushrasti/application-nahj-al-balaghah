@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="250dp"
     android:layout_height="200dp"
-    android:background="?attr/cardBgColor"
+    android:background="?attr/colorSurface"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -13,11 +13,11 @@
         android:layout_weight="1"
         android:text="@string/text_size"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="?attr/colorOnSurface" />
 
     <SeekBar
         android:id="@+id/df_font_seek_bar"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"

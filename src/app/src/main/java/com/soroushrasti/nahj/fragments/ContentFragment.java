@@ -119,6 +119,9 @@ public class ContentFragment extends Fragment {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
+        // Hide language switch on content pages
+        MenuItem lang = menu.findItem(R.id.action_language);
+        if (lang != null) lang.setVisible(false);
         menu.findItem(R.id.action_search).setVisible(false);
 
         final MenuItem favorite = menu.findItem(R.id.action_favorite);

@@ -80,6 +80,9 @@ public class ListFragment extends Fragment {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
+        // Explicitly hide language switch on list pages
+        MenuItem lang = menu.findItem(R.id.action_language);
+        if (lang != null) lang.setVisible(false);
         menu.findItem(R.id.action_favorite).setVisible(false);
         menu.findItem(R.id.action_font).setVisible(false);
         menu.findItem(R.id.action_share).setVisible(false);

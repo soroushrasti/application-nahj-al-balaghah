@@ -47,6 +47,10 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import androidx.appcompat.app.AppCompatDelegate;
+import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 
 
 public class MainActivity extends AppCompatActivity
@@ -224,13 +228,33 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    private int resolveAttrColor(int attr) {
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(attr, tv, true)) {
+            if (tv.resourceId != 0) {
+                return ContextCompat.getColor(this, tv.resourceId);
+            } else {
+                return tv.data;
+            }
+        }
+        return ContextCompat.getColor(this, android.R.color.white);
+    }
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // Only show language switch icon on home fragment
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frg_container);
         MenuItem languageItem = menu.findItem(R.id.action_language);
         if (languageItem != null) {
-            languageItem.setVisible(currentFragment instanceof HomeFragment);
+            boolean visible = currentFragment instanceof HomeFragment;
+            languageItem.setVisible(visible);
+            if (visible && languageItem.getIcon() != null) {
+                // Force a strong contrast on Home by tinting to brand primary color
+                int tint = resolveAttrColor(com.google.android.material.R.attr.colorPrimary);
+                Drawable icon = DrawableCompat.wrap(languageItem.getIcon().mutate());
+                DrawableCompat.setTint(icon, tint);
+                languageItem.setIcon(icon);
+            }
         }
         return super.onPrepareOptionsMenu(menu);
     }
