@@ -29,14 +29,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="20dp"
-                android:background="@drawable/gradient_header_bg">
+                android:background="?attr/colorPrimary">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/spiritual_words"
                     android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textStyle="bold"
                     android:gravity="center"
                     android:layout_marginBottom="8dp" />
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/spiritual_words_fa"
                     android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/colorOnPrimary"
                     android:gravity="center"
                     android:fontFamily="serif" />
             </LinearLayout>

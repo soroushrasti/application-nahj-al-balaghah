@@ -55,12 +55,12 @@
 
     <style name="MyAppBarTitleAppearance" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="fontFamily">@font/iran_sans</item>
     </style>
 
     <style name="MyNavigationViewItemAppearance" parent="TextAppearance.Material3.BodyLarge">
-        <item name="android:textColor">@color/colorDarkFont</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="fontFamily">@font/iran_sans</item>
     </style>
 

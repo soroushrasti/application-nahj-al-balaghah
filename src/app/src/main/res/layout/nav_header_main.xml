@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/gradient_header_bg"
+    android:background="?attr/colorSurface"
     android:gravity="center"
     android:padding="24dp"
     android:paddingTop="48dp"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="@string/spiritual_words"
         android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-        android:textColor="@color/white"
+        android:textColor="?attr/colorOnSurface"
         android:textStyle="bold"
         android:layout_marginBottom="6dp" />
 
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:text="@string/spiritual_words_fa"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-        android:textColor="@color/white"
+        android:textColor="?attr/colorOnSurface"
         android:alpha="0.9"
         android:fontFamily="serif" />
 
