@@ -46,6 +46,7 @@ import org.json.JSONArray;
 import java.io.InputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import androidx.appcompat.app.AppCompatDelegate;
 
 
 public class MainActivity extends AppCompatActivity
@@ -74,6 +75,13 @@ public class MainActivity extends AppCompatActivity
         currentLang = sharedPref.getString("LANG", "fa");
         applyLocale(currentLang);
 
+        // Apply night mode via AppCompatDelegate before inflating views
+        if (sharedPref.getBoolean("THEME_NIGHT_MODE", false)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         super.onCreate(savedInstanceState);
 
         if (sharedPref.getBoolean("THEME_NIGHT_MODE", false)) {
@@ -96,17 +104,8 @@ public class MainActivity extends AppCompatActivity
             return insets;
         });
         setSupportActionBar(toolbar);
-        // Language switcher
-        View langSwitcher = toolbar.findViewById(R.id.language_switcher);
-        if (langSwitcher != null) {
-            langSwitcher.setOnClickListener(v -> {
-                String newLang = currentLang.equals("fa") ? "en" : "fa";
-                editor = sharedPref.edit();
-                editor.putString("LANG", newLang).apply();
-                Toast.makeText(this, getString(R.string.language_changed), Toast.LENGTH_SHORT).show();
-                recreate();
-            });
-        }
+        // Language switcher - REMOVED (now using menu-based switcher only)
+
         // Adjust layout direction dynamically
         drawer = findViewById(R.id.drawer_layout);
         if (currentLang.equals("en")) {
@@ -120,6 +119,9 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Refresh menu when back stack changes to keep language icon only on Home
+        getSupportFragmentManager().addOnBackStackChangedListener(() -> invalidateOptionsMenu());
 
         // Inset bottom for content container to avoid nav bar overlap
         View frg = findViewById(R.id.frg_container);
@@ -147,15 +149,16 @@ public class MainActivity extends AppCompatActivity
                 editor = sharedPref.edit();
                 if (isChecked) {
                     editor.putBoolean("THEME_NIGHT_MODE", true);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     nightModeToggle.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_moon_green));
                 } else {
                     editor.putBoolean("THEME_NIGHT_MODE", false);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     nightModeToggle.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_moon_black));
                 }
                 editor.apply();
-                Intent i = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(i);
-                finish();
+                // Recreate to apply theme changes across the activity
+                recreate();
             }
         });
 
@@ -243,12 +246,6 @@ public class MainActivity extends AppCompatActivity
             editor.apply();
             Toast.makeText(this, getString(R.string.language_changed), Toast.LENGTH_SHORT).show();
             recreate();
-            return true;
-        } else if (id == R.id.action_dump_untranslated) {
-            dumpUntranslated();
-            return true;
-        } else if (id == R.id.action_import_translations) {
-            importTranslations();
             return true;
         }
         return super.onOptionsItemSelected(item);

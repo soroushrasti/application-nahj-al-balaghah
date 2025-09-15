@@ -23,18 +23,7 @@
             app:titleCentered="true"
             app:titleTextColor="@color/colorPrimary"
             app:titleTextAppearance="@style/MyAppBarTitleAppearance"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
-            <ImageView
-                android:id="@+id/language_switcher"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_language"
-                android:layout_gravity="end"
-                android:padding="16dp"
-                android:contentDescription="@string/language_switcher" />
-
-        </com.google.android.material.appbar.MaterialToolbar>
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

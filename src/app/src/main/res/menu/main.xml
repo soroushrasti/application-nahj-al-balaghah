@@ -34,12 +34,4 @@
         android:icon="@drawable/ic_share"
         android:title="@string/share"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_dump_untranslated"
-        android:title="@string/dump_untranslated"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_import_translations"
-        android:title="@string/import_translations"
-        app:showAsAction="never" />
 </menu>
