@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#263238"
+                android:centerColor="#37474F"
+                android:endColor="#2E7D32"
+                android:angle="90"/>
+        </shape>
+    </item>
+    <!-- Optional subtle overlay logo, if using bitmap later could go here -->
+</layer-list>
+

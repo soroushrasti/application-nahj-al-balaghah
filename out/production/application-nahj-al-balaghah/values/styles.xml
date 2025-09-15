@@ -1,0 +1,60 @@
+<resources>
+
+    <!-- Base application theme using Material 3 DayNight -->
+    <style name="AppTheme" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorDarkFont</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">@color/colorBackground</item>
+        <item name="fontFamily">@font/iran_sans</item>
+    </style>
+
+    <style name="IntroTheme" parent="Theme.Material3.Dark">
+        <item name="colorPrimary">@color/colorNightPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/colorNightAccent</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:windowBackground">@color/colorNightPrimaryDark</item>
+        <item name="fontFamily">@font/iran_sans</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.Material3.ActionBar">
+        <item name="android:textColorHint">@color/colorSecondaryText</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.Material3" />
+
+    <style name="MyTextAppearance" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/iran_sans</item>
+        <item name="android:textColor">@color/colorDarkFont</item>
+    </style>
+
+    <style name="MyAppBarTitleAppearance" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/iran_sans</item>
+    </style>
+
+    <style name="MyNavigationViewItemAppearance" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">@color/colorDarkFont</item>
+        <item name="fontFamily">@font/iran_sans</item>
+    </style>
+
+    <style name="MyNightTextAppearance" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/iran_sans</item>
+        <item name="android:textColor">@color/colorLightFont</item>
+    </style>
+
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/nav_wisdoms"
+            android:icon="@drawable/ic_wisdom"
+            android:title="@string/wisdoms" />
+        <item
+            android:id="@+id/nav_sermons"
+            android:icon="@drawable/ic_sermon"
+            android:title="@string/sermons" />
+        <item
+            android:id="@+id/nav_letters"
+            android:icon="@drawable/ic_letter"
+            android:title="@string/letters" />
+        <item
+            android:id="@+id/nav_strange_words"
+            android:icon="@drawable/ic_strange_words"
+            android:title="@string/strange_words" />
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/ic_star_filled_black"
+            android:title="@string/favorites" />
+    </group>
+
+</menu>

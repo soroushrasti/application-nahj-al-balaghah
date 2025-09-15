@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Modern Spiritual Color Palette -->
+    <color name="colorPrimary">#2E7D4F</color>
+    <color name="colorPrimaryDark">#1B5D3A</color>
+    <color name="colorAccent">#D4A574</color>
+
+    <!-- Night Mode Colors -->
+    <color name="colorNightPrimaryLight">#455A64</color>
+    <color name="colorNightPrimary">#37474F</color>
+    <color name="colorNightPrimaryDark">#263238</color>
+    <color name="colorNightAccent">#D4A574</color>
+
+    <!-- Text Colors -->
+    <color name="colorDarkFont">#2C3E50</color>
+    <color name="colorLightFont">#FAFAFA</color>
+    <color name="colorSecondaryText">#7F8C8D</color>
+
+    <!-- Category Colors - More Spiritual and Attractive -->
+    <color name="colorWisdoms">#8E44AD</color>
+    <color name="colorWisdomsDark">#6C3483</color>
+    <color name="colorWisdomsLight">#D7BDE2</color>
+
+    <color name="colorSermons">#3498DB</color>
+    <color name="colorSermonsDark">#2E86C1</color>
+    <color name="colorSermonsLight">#AED6F1</color>
+
+    <color name="colorLetters">#E67E22</color>
+    <color name="colorLettersDark">#D35400</color>
+    <color name="colorLettersLight">#F8C471</color>
+
+    <color name="colorStranges">#16A085</color>
+    <color name="colorStrangesDark">#138D75</color>
+    <color name="colorStrangesLight">#A2D9CE</color>
+
+    <!-- About colors for backward compatibility -->
+    <color name="colorAbout">#8E44AD</color>
+    <color name="colorAboutDark">#6C3483</color>
+
+    <!-- Background Colors -->
+    <color name="colorBackground">#F8F9FA</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorCardBackground">#FFFFFF</color>
+
+    <!-- Gradient Colors -->
+    <color name="gradientStart">#2E7D4F</color>
+    <color name="gradientEnd">#4CAF50</color>
+
+    <!-- Header Colors -->
+    <color name="headerBackground">#FFFFFF</color>
+    <color name="headerText">#2E7D4F</color>
+
+    <!-- Common Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="divider">#E0E0E0</color>
+</resources>
