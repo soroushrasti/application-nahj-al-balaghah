@@ -42,6 +42,19 @@
     <color name="colorSurface">#FFFFFF</color>
     <color name="colorCardBackground">#FFFFFF</color>
 
+    <!-- Enhanced Card Background Colors - Aligned with Category Colors -->
+    <!-- Day Mode Card Backgrounds -->
+    <color name="cardBackgroundSermons">@color/colorSermonsLight</color>     <!-- Light blue -->
+    <color name="cardBackgroundLetters">@color/colorLettersLight</color>     <!-- Light orange -->
+    <color name="cardBackgroundWisdoms">@color/colorWisdomsLight</color>     <!-- Light purple -->
+    <color name="cardBackgroundStranges">@color/colorStrangesLight</color>   <!-- Light teal -->
+
+    <!-- Card Border Colors - Match Category Colors -->
+    <color name="cardBorderSermons">@color/colorSermons</color>
+    <color name="cardBorderLetters">@color/colorLetters</color>
+    <color name="cardBorderWisdoms">@color/colorWisdoms</color>
+    <color name="cardBorderStranges">@color/colorStranges</color>
+
     <!-- Gradient Colors -->
     <color name="gradientStart">#2E7D4F</color>
     <color name="gradientEnd">#4CAF50</color>
@@ -55,4 +68,33 @@
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
     <color name="divider">#E0E0E0</color>
+    <color name="colorStroke">#E0E0E0</color>
+
+    <!-- Extended Material Color Roles -->
+    <color name="colorPrimaryContainer">#EDF7F1</color>
+    <color name="colorOnPrimaryContainer">#0F3C24</color>
+    <color name="colorSecondary">#6B4F2E</color>
+    <color name="colorSecondaryContainer">#F5E8D7</color>
+    <color name="colorOnSecondaryContainer">#402A12</color>
+    <color name="colorTertiary">#9B5E2E</color>
+    <color name="colorTertiaryContainer">#FFE3C9</color>
+    <color name="colorOnTertiaryContainer">#4A2503</color>
+    <color name="colorOutline">#8AA099</color>
+    <color name="colorSurfaceVariant">#E0ECE6</color>
+    <color name="colorOnSurfaceVariant">#45524E</color>
+    <color name="rippleLight">#1F2E7D4F</color>
+    <color name="rippleDark">#33FFFFFF</color>
+
+    <!-- Ripple and interaction colors -->
+    <color name="homecard_ripple">#1A2E7D4F</color>
+
+    <!-- Category accent colors for dynamic HomeCard backgrounds -->
+    <color name="accent_sermons">#E3F2FD</color>
+    <color name="accent_letters">#FFF3E0</color>
+    <color name="accent_wisdoms">#F3E5F5</color>
+    <color name="accent_strange_words">#E0F2F1</color>
+
+    <!-- Icon tint unified colors -->
+    <color name="icon_tint_primary">@color/colorPrimary</color>
+    <color name="icon_tint_secondary">@color/colorSecondaryText</color>
 </resources>

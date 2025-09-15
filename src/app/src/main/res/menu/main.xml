@@ -14,6 +14,11 @@
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
     <item
+        android:id="@+id/action_language"
+        android:icon="@drawable/ic_language"
+        android:title="@string/switch_language"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/action_favorite"
         android:checkable="true"
         android:icon="@drawable/ic_star_outline"
@@ -29,4 +34,12 @@
         android:icon="@drawable/ic_share"
         android:title="@string/share"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_dump_untranslated"
+        android:title="@string/dump_untranslated"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_import_translations"
+        android:title="@string/import_translations"
+        app:showAsAction="never" />
 </menu>

@@ -1,6 +1,8 @@
 package com.soroushrasti.nahj.fragments;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.core.view.MenuItemCompat;
@@ -25,6 +27,7 @@ import com.soroushrasti.nahj.database.Model;
 import com.soroushrasti.nahj.database.SqlLiteDbHelper;
 import com.soroushrasti.nahj.recyclerlist.Item;
 import com.soroushrasti.nahj.recyclerlist.ItemAdapter;
+import androidx.core.view.ViewCompat;
 
 
 /**
@@ -46,6 +49,14 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
+        // Language based direction
+        SharedPreferences sp = requireContext().getSharedPreferences("com.soroushrasti.nahj.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
+        String lang = sp.getString("LANG", "fa");
+        if ("en".equals(lang)) {
+            ViewCompat.setLayoutDirection(view, ViewCompat.LAYOUT_DIRECTION_LTR);
+        } else {
+            ViewCompat.setLayoutDirection(view, ViewCompat.LAYOUT_DIRECTION_RTL);
+        }
 
         myRecycler = view.findViewById(R.id.fl_recycler);
         mAdapter = new ItemAdapter(mItem, getContext());

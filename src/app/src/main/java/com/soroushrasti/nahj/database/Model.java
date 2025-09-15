@@ -8,6 +8,7 @@ public class Model {
     private String title;
     private String cnt;
     private int fav;
+    private String language = "fa";
 
     public Model(int id, int cat, String num, String title, String cnt, int fav) {
         this.id = id;
@@ -31,10 +32,12 @@ public class Model {
     }
 
     public String getNum() {
+        if ("en".equals(language)) return num == null ? "" : num.trim();
         return persianNumEditor(num);
     }
 
     public String getTitle() {
+        if ("en".equals(language)) return title == null ? "" : title.trim();
         return persianEditor(title);
     }
 
@@ -47,6 +50,9 @@ public class Model {
     }
 
     public String getcnt() {
+        if ("en".equals(language)) {
+            return cnt == null ? "" : cnt.trim();
+        }
         cnt = persianEditor(cnt);
         cnt = cnt.replaceAll("[.،؛:]+$", "");
         cnt = cnt.replaceAll("([^?!])$", "$1.");
@@ -60,6 +66,10 @@ public class Model {
     public void setFav(int fav) {
         this.fav = fav;
     }
+
+    public void setLanguage(String lang) { this.language = (lang == null ? "fa" : lang); }
+
+    public String getLanguage() { return language; }
 
     private String persianEditor(String cnt) {
 //        cnt = cnt.trim();

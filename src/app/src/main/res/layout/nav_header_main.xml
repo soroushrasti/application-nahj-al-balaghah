@@ -11,40 +11,43 @@
     android:fitsSystemWindows="true">
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
         android:src="@drawable/icon"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/circle_background"
-        android:padding="8dp"
+        android:padding="12dp"
         android:scaleType="centerCrop"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        android:elevation="4dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Spiritual Words"
+        android:text="@string/spiritual_words"
         android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:layout_marginBottom="4dp" />
+        android:layout_marginBottom="6dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="کلمات روحانی"
+        android:text="@string/spiritual_words_fa"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
         android:textColor="@color/white"
+        android:alpha="0.9"
         android:fontFamily="serif" />
 
     <ToggleButton
         android:id="@+id/night_mode_toggle"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/toggle_button_bg"
         android:text=""
         android:textOff=""
-        android:textOn="" />
+        android:textOn=""
+        android:elevation="2dp" />
 
 </LinearLayout>

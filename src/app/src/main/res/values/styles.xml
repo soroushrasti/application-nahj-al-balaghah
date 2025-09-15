@@ -4,14 +4,26 @@
     <style name="AppTheme" parent="Theme.Material3.DayNight">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorPrimaryContainer">@color/colorPrimaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colorOnPrimaryContainer</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorOnSecondary">@color/white</item>
-        <item name="colorSurface">@color/colorSurface</item>
-        <item name="colorOnSurface">@color/colorDarkFont</item>
+        <item name="colorSecondaryContainer">@color/colorSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colorOnSecondaryContainer</item>
+        <item name="colorTertiary">@color/colorTertiary</item>
+        <item name="colorTertiaryContainer">@color/colorTertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colorOnTertiaryContainer</item>
+        <item name="colorOutline">@color/colorOutline</item>
+        <item name="colorSurfaceVariant">@color/colorSurfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colorOnSurfaceVariant</item>
         <item name="android:windowBackground">@color/colorBackground</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="fontFamily">@font/iran_sans</item>
+        <item name="shapeAppearanceSmallComponent">@style/Shape.Spiritual.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/Shape.Spiritual.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/Shape.Spiritual.Large</item>
     </style>
 
     <style name="IntroTheme" parent="Theme.Material3.Dark">
@@ -57,4 +69,67 @@
         <item name="android:textColor">@color/colorLightFont</item>
     </style>
 
+    <style name="SpiritualNightTheme" parent="Theme.Material3.Dark">
+        <item name="colorPrimary">@color/colorNightPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/colorNightAccent</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:windowBackground">@color/colorNightPrimaryDark</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="HomeCard" parent="Widget.Material3.CardView.Filled">
+        <item name="android:layout_margin">8dp</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardBackgroundColor">@color/colorSurface</item>
+        <item name="strokeColor">@color/colorStroke</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:stateListAnimator">@animator/card_lift_on_touch</item>
+    </style>
+
+    <!-- Category-specific HomeCard styles with beautiful backgrounds -->
+    <style name="HomeCard.Sermons" parent="HomeCard">
+        <item name="cardBackgroundColor">@color/cardBackgroundSermons</item>
+        <item name="strokeColor">@color/cardBorderSermons</item>
+    </style>
+
+    <style name="HomeCard.Letters" parent="HomeCard">
+        <item name="cardBackgroundColor">@color/cardBackgroundLetters</item>
+        <item name="strokeColor">@color/cardBorderLetters</item>
+    </style>
+
+    <style name="HomeCard.Wisdoms" parent="HomeCard">
+        <item name="cardBackgroundColor">@color/cardBackgroundWisdoms</item>
+        <item name="strokeColor">@color/cardBorderWisdoms</item>
+    </style>
+
+    <style name="HomeCard.StrangeWords" parent="HomeCard">
+        <item name="cardBackgroundColor">@color/cardBackgroundStranges</item>
+        <item name="strokeColor">@color/cardBorderStranges</item>
+    </style>
+
+    <style name="HomeCardText" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:gravity">center</item>
+        <item name="android:padding">24dp</item>
+        <item name="android:textColor">@color/colorDarkFont</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Shape.Spiritual.Small" parent="ShapeAppearance.Material3.Corner.Small">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+    <style name="Shape.Spiritual.Medium" parent="ShapeAppearance.Material3.Corner.Medium">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+    <style name="Shape.Spiritual.Large" parent="ShapeAppearance.Material3.Corner.Large">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">28dp</item>
+    </style>
 </resources>

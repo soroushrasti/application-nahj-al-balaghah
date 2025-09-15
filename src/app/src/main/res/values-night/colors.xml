@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Night Mode Override Colors -->
+
+    <!-- Background Colors for Night Mode -->
+    <color name="colorBackground">#121212</color>
+    <color name="colorSurface">#1E1E1E</color>
+    <color name="colorCardBackground">#2D2D2D</color>
+
+    <!-- Night Mode Card Backgrounds - Darker tints with category colors -->
+    <color name="cardBackgroundSermons">#1A2332</color>     <!-- Dark blue tint -->
+    <color name="cardBackgroundLetters">#2D2319</color>     <!-- Dark orange tint -->
+    <color name="cardBackgroundWisdoms">#261A2D</color>     <!-- Dark purple tint -->
+    <color name="cardBackgroundStranges">#1A2D26</color>    <!-- Dark teal tint -->
+
+    <!-- Night Mode Card Border Colors -->
+    <color name="cardBorderSermons">#2E86C1</color>
+    <color name="cardBorderLetters">#D35400</color>
+    <color name="cardBorderWisdoms">#6C3483</color>
+    <color name="cardBorderStranges">#138D75</color>
+
+    <!-- Text Colors for Night Mode -->
+    <color name="colorDarkFont">#E0E0E0</color>  <!-- Light text for night mode -->
+    <color name="colorSecondaryText">#B0B0B0</color>
+
+    <!-- Header Colors for Night Mode -->
+    <color name="headerBackground">#1E1E1E</color>
+    <color name="headerText">#4CAF50</color>
+
+    <!-- Stroke and divider colors for night mode -->
+    <color name="colorStroke">#3D3D3D</color>
+    <color name="divider">#3D3D3D</color>
+
+    <!-- Ripple colors for night mode -->
+    <color name="homecard_ripple">#334CAF50</color>
+</resources>

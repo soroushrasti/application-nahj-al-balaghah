@@ -36,4 +36,19 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="spiritual_words"> کلمات روحانی </string>
+    <string name="spiritual_words_fa">کلمات روحانی</string>
+    <string name="switch_language">Switch Language</string>
+    <string name="language_switcher">Change language</string>
+    <string name="english">English</string>
+    <string name="farsi">فارسی</string>
+    <string name="language_changed">زبان تغییر کرد</string>
+    <string name="dump_untranslated">خروجی آیتم‌های بدون ترجمه</string>
+    <string name="import_translations">درون‌ریزی ترجمه‌ها</string>
+    <string name="dump_success_message">لیست در Logcat (TAG=TranslationsDump) چاپ شد</string>
+    <string name="no_untranslated">همه‌ی موارد ترجمه دارند</string>
+    <string name="import_result">به‌روزرسانی ترجمه: %1$d موفق، %2$d خطا</string>
+    <string name="import_file_not_found">فایل translations_en.json یافت نشد</string>
+    <string name="import_parse_error">خطا در خواندن فایل ترجمه</string>
+    <string name="stranges">کلمات غریب</string>
 </resources>

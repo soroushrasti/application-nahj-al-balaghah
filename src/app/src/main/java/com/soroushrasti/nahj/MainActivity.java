@@ -30,6 +30,9 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import java.util.Locale;
 
 import com.soroushrasti.nahj.fragments.HomeFragment;
 import com.soroushrasti.nahj.fragments.ListFragment;
@@ -37,6 +40,12 @@ import com.soroushrasti.nahj.recyclerlist.Item;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.graphics.Insets;
+import android.util.Log;
+import com.soroushrasti.nahj.database.SqlLiteDbHelper;
+import org.json.JSONArray;
+import java.io.InputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 
 public class MainActivity extends AppCompatActivity
@@ -46,15 +55,29 @@ public class MainActivity extends AppCompatActivity
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
     DrawerLayout drawer;
+    private String currentLang;
+
+    private void applyLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Resources res = getResources();
+        Configuration config = new Configuration(res.getConfiguration());
+        config.setLocale(locale);
+        getApplicationContext().createConfigurationContext(config);
+        res.updateConfiguration(config, res.getDisplayMetrics());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        sharedPref = getSharedPreferences("com.soroushrasti.nahj.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
+        currentLang = sharedPref.getString("LANG", "fa");
+        applyLocale(currentLang);
+
         super.onCreate(savedInstanceState);
 
-        sharedPref = getSharedPreferences("com.soroushrasti.nahj.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
         if (sharedPref.getBoolean("THEME_NIGHT_MODE", false)) {
-            setTheme(R.style.NightTheme_NoActionBar);
+            setTheme(R.style.SpiritualNightTheme);
         } else {
             setTheme(R.style.AppTheme_NoActionBar);
         }
@@ -73,9 +96,25 @@ public class MainActivity extends AppCompatActivity
             return insets;
         });
         setSupportActionBar(toolbar);
-
-        // NavigationDrawer
+        // Language switcher
+        View langSwitcher = toolbar.findViewById(R.id.language_switcher);
+        if (langSwitcher != null) {
+            langSwitcher.setOnClickListener(v -> {
+                String newLang = currentLang.equals("fa") ? "en" : "fa";
+                editor = sharedPref.edit();
+                editor.putString("LANG", newLang).apply();
+                Toast.makeText(this, getString(R.string.language_changed), Toast.LENGTH_SHORT).show();
+                recreate();
+            });
+        }
+        // Adjust layout direction dynamically
         drawer = findViewById(R.id.drawer_layout);
+        if (currentLang.equals("en")) {
+            ViewCompat.setLayoutDirection(drawer, ViewCompat.LAYOUT_DIRECTION_LTR);
+        } else {
+            ViewCompat.setLayoutDirection(drawer, ViewCompat.LAYOUT_DIRECTION_RTL);
+        }
+        // NavigationDrawer
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -183,85 +222,160 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Only show language switch icon on home fragment
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frg_container);
+        MenuItem languageItem = menu.findItem(R.id.action_language);
+        if (languageItem != null) {
+            languageItem.setVisible(currentFragment instanceof HomeFragment);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
+        if (id == R.id.action_language) {
+            // Switch language
+            String newLang = currentLang.equals("fa") ? "en" : "fa";
+            editor = sharedPref.edit();
+            editor.putString("LANG", newLang);
+            editor.apply();
+            Toast.makeText(this, getString(R.string.language_changed), Toast.LENGTH_SHORT).show();
+            recreate();
             return true;
-        }*/
-
+        } else if (id == R.id.action_dump_untranslated) {
+            dumpUntranslated();
+            return true;
+        } else if (id == R.id.action_import_translations) {
+            importTranslations();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void dumpUntranslated() {
+        SqlLiteDbHelper db = new SqlLiteDbHelper(this);
+        db.openDataBase();
+        var list = db.getUntranslated();
+        if (list.isEmpty()) {
+            Toast.makeText(this, getString(R.string.no_untranslated), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < list.size(); i++) {
+            var m = list.get(i);
+            sb.append("{\"id\":").append(m.getId())
+              .append(",\"title_en\":\"\",\"cnt_en\":\"\"}");
+            if (i < list.size() - 1) sb.append(",");
+        }
+        sb.append("]");
+        Log.d("TranslationsDump", sb.toString());
+        Toast.makeText(this, getString(R.string.dump_success_message), Toast.LENGTH_SHORT).show();
+    }
+
+    private byte[] readAll(InputStream is) throws IOException {
+        java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int n;
+        while ((n = is.read(buffer)) != -1) baos.write(buffer, 0, n);
+        return baos.toByteArray();
+    }
+
+    private void importTranslations() {
+        try {
+            InputStream is = getAssets().open("translations_en.json");
+            byte[] buf = readAll(is);
+            is.close();
+            String json = new String(buf, StandardCharsets.UTF_8);
+            JSONArray arr = new JSONArray(json);
+            SqlLiteDbHelper db = new SqlLiteDbHelper(this);
+            db.openDataBase();
+            int success = db.importTranslationsFromJsonArray(arr);
+            int fail = arr.length() - success;
+            Toast.makeText(this, getString(R.string.import_result, success, fail), Toast.LENGTH_LONG).show();
+            recreate();
+        } catch (IOException e) {
+            Toast.makeText(this, getString(R.string.import_file_not_found), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.import_parse_error), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        FragmentTransaction transaction;
+        Fragment newFragment;
         if (id == R.id.nav_home) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
                     .replace(R.id.frg_container, new HomeFragment())
                     .commit();
+            // Invalidate menu to show language switch icon on home
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_wisdoms) {
             Bundle bundle = new Bundle();
             bundle.putInt("CAT", 3);
             bundle.putString("TOOLBAR_TITLE", getString(R.string.wisdoms));
-            Fragment newFragment = new ListFragment();
+            newFragment = new ListFragment();
             newFragment.setArguments(bundle);
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction = getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
             transaction.replace(R.id.frg_container, newFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            // Invalidate menu to hide language switch icon on other fragments
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_sermons) {
             Bundle bundle = new Bundle();
             bundle.putInt("CAT", 1);
             bundle.putString("TOOLBAR_TITLE", getString(R.string.sermons));
-            Fragment newFragment = new ListFragment();
+            newFragment = new ListFragment();
             newFragment.setArguments(bundle);
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction = getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
             transaction.replace(R.id.frg_container, newFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_letters) {
             Bundle bundle = new Bundle();
             bundle.putInt("CAT", 2);
             bundle.putString("TOOLBAR_TITLE", getString(R.string.letters));
-            Fragment newFragment = new ListFragment();
+            newFragment = new ListFragment();
             newFragment.setArguments(bundle);
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction = getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
             transaction.replace(R.id.frg_container, newFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_strange_words) {
             Bundle bundle = new Bundle();
             bundle.putInt("CAT", 4);
             bundle.putString("TOOLBAR_TITLE", getString(R.string.strange_words));
-            Fragment newFragment = new ListFragment();
+            newFragment = new ListFragment();
             newFragment.setArguments(bundle);
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction = getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
             transaction.replace(R.id.frg_container, newFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_favorites) {
             Bundle bundle = new Bundle();
             bundle.putBoolean("FAV", true);
-            Fragment newFragment = new ListFragment();
+            newFragment = new ListFragment();
             newFragment.setArguments(bundle);
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction = getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
             transaction.replace(R.id.frg_container, newFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+            invalidateOptionsMenu();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
